@@ -1,0 +1,35 @@
+{
+	"name": "nuxt-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"lint:style": "stylelint src/`/*.{css,less,vue} --fix",
+		"prepare": "husky",
+		"pre-commit": "lint-staged",
+		"commitlint": "commitlint --config commitlint.config.cjs -e -V"
+	},
+	"dependencies": {
+		"nuxt": "^3.12.2",
+		"vue": "^3.4.29",
+		"vue-router": "^4.3.3"
+	},
+	"packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
+	"devDependencies": {
+		"@commitlint/cli": "^19.3.0",
+		"@commitlint/config-conventional": "^19.2.2",
+		"@nuxt/eslint-config": "^0.3.13",
+		"@nuxtjs/stylelint-module": "^5.2.0",
+		"eslint": "^9.5.0",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.7",
+		"stylelint": "^16.6.1",
+		"stylelint-config-recommended-vue": "^1.5.0",
+		"stylelint-config-standard": "^36.0.0",
+		"stylelint-order": "^6.0.4"
+	}
+}
