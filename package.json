@@ -1,5 +1,6 @@
 {
 	"name": "nuxt-app",
+	"version": "0.0.1",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -15,7 +16,11 @@
 		"release": "release-it"
 	},
 	"dependencies": {
+		"@pinia/nuxt": "^0.5.1",
+		"dexie": "^4.0.7",
+		"element-plus": "^2.7.5",
 		"nuxt": "^3.12.2",
+		"pinia": "^2.1.7",
 		"vue": "^3.4.29",
 		"vue-router": "^4.3.3"
 	},
@@ -23,17 +28,25 @@
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
 		"@commitlint/config-conventional": "^19.2.2",
+		"@element-plus/nuxt": "^1.0.9",
 		"@nuxt/eslint-config": "^0.3.13",
+		"@nuxt/image": "^1.7.0",
+		"@nuxtjs/color-mode": "^3.4.1",
 		"@nuxtjs/stylelint-module": "^5.2.0",
+		"@nuxtjs/tailwindcss": "^6.12.0",
 		"@release-it/conventional-changelog": "^8.0.1",
+		"dayjs": "^1.11.11",
+		"dayjs-nuxt": "^2.1.9",
 		"eslint": "^9.5.0",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.7",
+		"nuxt-icon": "^0.6.10",
+		"nuxt-icons": "^3.2.1",
 		"release-it": "^17.3.0",
+		"sass": "^1.77.6",
 		"stylelint": "^16.6.1",
 		"stylelint-config-recommended-vue": "^1.5.0",
 		"stylelint-config-standard": "^36.0.0",
 		"stylelint-order": "^6.0.4"
-	},
-	"version": "0.0.1"
+	}
 }

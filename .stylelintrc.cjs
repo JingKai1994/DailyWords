@@ -2,8 +2,6 @@ module.exports = {
     extends: ['stylelint-config-standard', 'stylelint-config-recommended-vue'], // // 這裡保證 stylelint-config-recommended-vue 放在最後，不然 vue 文件會報錯
     plugins: ['stylelint-order'],
     rules: {
-        // 顏色指定大寫
-        'color-hex-case': 'upper',
         // 禁止空塊
         'block-no-empty': true,
         // 顏色6位長度
@@ -15,6 +13,7 @@ module.exports = {
                 ignoreTypes: []
             }
         ],
+        "selector-class-pattern": null,
         // 忽略偽類選擇器 ::v-deep
         'selector-pseudo-element-no-unknown': [
             true,
@@ -34,10 +33,6 @@ module.exports = {
         'value-no-vendor-prefix': true,
         // property-no-vendor-prefix
         'property-no-vendor-prefix': true,
-        // 禁止小於 1 的小數有一個前導零
-        'number-leading-zero': 'never',
-        // 禁止空第一行
-        'no-empty-first-line': true,
         // 屬性的排序
         'order/properties-order': [
             'position',

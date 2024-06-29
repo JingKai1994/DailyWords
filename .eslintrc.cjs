@@ -13,7 +13,8 @@ module.exports = {
     },
     plugins: ['vue'],
     rules: {
-        camelcase: 2, // 駝峰
+        indent: ["error", 4],
+        camelcase: 'off', // 駝峰
         semi: [2, 'never'], // 要求或禁止使用分號代替 ASI,即禁用行尾使用分號
         quotes: ['error', 'single'], // 強制使用一致的反勾號、雙引號或單引號
         'no-debugger': 2, // 不能debugg

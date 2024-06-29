@@ -1,8 +1,6 @@
 {
-    "lint-staged": {
-        "*.{js,jsx,vue,ts,tsx}": [
-            "eslint --fix",
-            "prettier --write"
-        ]
-    }
+    "lint-staged": [
+        "eslint --fix *.{js,jsx,vue,ts,tsx}",
+        "prettier --write *.{js,jsx,vue,ts,tsx}"
+    ]
 }
