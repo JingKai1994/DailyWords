@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import getRandomElements from "~/utils/randomNumbers";
 import { addTodayData, getDailyData } from "~/composables/useDailyData";
-import type { WordItem } from "~/types";
+import type { WordItem } from "~/types/wordItem";
 
 export const useDailyWordListStore = defineStore("dailyListState", () => {
     const wordListStore = useWordListStore();
     const dailyWordList: Ref<WordItem[]> = ref([]);
 
-    const generateDailyWordList = async () => {
+    const getDailyWordList = async () => {
         let randomElements;
         const dayilyData = await getDailyData();
         if (dayilyData) {
@@ -24,7 +24,7 @@ export const useDailyWordListStore = defineStore("dailyListState", () => {
             dailyWordList.value = wordListStore.wordList;
         } else {
             dailyWordList.value = randomElements.map(
-                (i) => wordListStore.wordList[i]
+                (i) => wordListStore.wordList[i - 1]
             );
         }
     };
@@ -45,7 +45,7 @@ export const useDailyWordListStore = defineStore("dailyListState", () => {
 
     return {
         dailyWordList,
-        generateDailyWordList,
+        getDailyWordList,
         toggleDailyFavorite,
     };
 });

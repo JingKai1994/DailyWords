@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { WordItem } from "~/types";
+import type { WordItem } from "~/types/wordItem";
 
 defineProps({
     dailyPage: Boolean,
@@ -20,9 +20,7 @@ defineProps({
             {{ wordItem[1] }}</p>
         <div class="leading-10 text-base">
             <div class="flex justify-center items-start mb-2">
-                <button type="button" aria-label="speech" class="mr-5" @click="synthVoice(wordItem[1])">
-                    <Icon name="ph:speaker-simple-high-fill" class="w-6 h-6"></Icon>
-                </button>
+                <SynthVoiceBtn :word="wordItem[1]" />
                 <span class="mr-2.5 font-bold">({{ wordItem[2] }}.)</span>
                 <span> {{ wordItem[3] }}</span>
             </div>

@@ -13,9 +13,27 @@ export interface Favorite {
     data: number[];
 }
 
+export interface AnswerItem {
+    id: string;
+    answer: string;
+}
+
+export interface RecordItem {
+    type: string;
+    startTime: number;
+    endTime: number;
+    answerList: AnswerItem[];
+}
+
+export interface Record {
+    id: "record";
+    data: RecordItem[];
+}
+
 export class DailyWordsDB extends Dexie {
     dailyRecords!: Table<DailyRecord>;
     favorite!: Table<Favorite>;
+    quizRecord!: Table<Record>;
 
     constructor() {
         super("DailyWordsDB");
@@ -25,6 +43,10 @@ export class DailyWordsDB extends Dexie {
 
         this.version(1).stores({
             favorite: "id",
+        });
+
+        this.version(1).stores({
+            quizRecord: "id",
         });
     }
 }

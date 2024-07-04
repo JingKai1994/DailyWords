@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ElNotification } from "element-plus";
-import type { WordItem } from "~/types";
+import type { WordItem } from "~/types/wordItem";
 
 export const useWordListStore = defineStore("listState", () => {
     const wordList: Ref<WordItem[]> = shallowRef([]);
@@ -35,7 +35,7 @@ export const useWordListStore = defineStore("listState", () => {
         }
     };
 
-    const favoritetStore = useFavoriteListStore();
+    const favoritetStore = useFavoriteWordListStore();
     const toggleFavorite = async (number: string) => {
         const numberToNum = Number(number);
         const newFavoriteStatus = await toogleFavoriteDB(numberToNum);
@@ -55,9 +55,10 @@ export const useWordListStore = defineStore("listState", () => {
             triggerRef(wordList);
         }
         if (!newFavoriteStatus) {
-            favoritetStore.favoriteList = favoritetStore.favoriteList.filter(
-                (item) => item[0] !== number
-            );
+            favoritetStore.favoriteWordList =
+                favoritetStore.favoriteWordList.filter(
+                    (item) => item[0] !== number
+                );
         }
     };
 

@@ -3,12 +3,24 @@ const collapseStore = useCollapseStore()
 const { collapse } = storeToRefs(collapseStore)
 import { menuOptionsData } from '~/const'
 
+const route = useRoute()
+const getDefaultActive = computed(() => {
+    const exactMatch = menuOptionsData.find(menu => route.path === menu.route);
+    if (exactMatch) return exactMatch.route;
+
+    //尋找最長的前綴匹配
+    const matchingMenu = menuOptionsData
+        .filter(menu => route.path.startsWith(menu.route))
+        .sort((a, b) => b.route.length - a.route.length)[0];
+
+    return matchingMenu ? matchingMenu.route : '/';
+})
 const closeMenu = () => {
     collapse.value = true
 }
 </script>
 <template>
-    <el-menu :default-active="$route.path" class="w-full md:w-36 lg:w-52 z-50 !fixed top-[61px] bottom-0"
+    <el-menu :default-active="getDefaultActive" class="w-full md:w-36 lg:w-52 z-50 !fixed top-[61px] bottom-0"
         :collapse="collapse" :close-on-click-outside="true" router>
         <el-menu-item v-for="menu in menuOptionsData" :key="menu.route" :index="menu.route" @click="closeMenu">
             <Icon :name="menu.icon" class="w-5 h-5 mr-1.5"></Icon>

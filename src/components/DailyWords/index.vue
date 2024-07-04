@@ -2,10 +2,10 @@
 //獲取今日單字列表
 const dailyWordListStore = useDailyWordListStore()
 const { dailyWordList } = storeToRefs(dailyWordListStore)
-const { generateDailyWordList } = dailyWordListStore
+const { getDailyWordList } = dailyWordListStore
 
 onMounted(() => {
-    generateDailyWordList()
+    getDailyWordList()
 })
 //判斷是否閱讀完今日單字跳出測驗按鈕
 const readFinish = ref(false)
@@ -48,24 +48,6 @@ const { dialogVisibleToogle } = dialogVisibleStore
                 </div>
             </template>
         </el-card>
-        <div class="w-full md:w-3/4 lg:w-1/3 mx-auto">
-            <h2 class="w-full text-5xl text-center mb-10 font-Unica">Start Now</h2>
-            <p class="text-xl text-center mb-10">Why wait for tomorrow to learn something new? Start expanding your
-                vocabulary
-                today. Dive into the world
-                of
-                words
-                now and wake up wiser tomorrow.
-            </p>
-            <div>
-                <el-button type="primary" size="large" round>
-                    <span class="text-base font-bold">Discover Words</span>
-                </el-button>
-                <el-button type="danger" size="large" round>
-                    <span class="text-base font-bold">My Favourites</span>
-                </el-button>
-            </div>
-        </div>
     </div>
 </template>
 <style lang="scss">

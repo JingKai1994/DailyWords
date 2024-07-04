@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 
-import type { ColorModeSvg } from '~/types'
+import type { ColorModeSvg } from '~/types/headerInfo'
 
 defineProps<ColorModeSvg>()
 

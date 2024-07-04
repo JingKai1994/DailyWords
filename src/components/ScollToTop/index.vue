@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const showScrollTop = ref(false)
 const scrollElement: Ref<HTMLElement | null> = ref(null)
 const topSentinel = ref<HTMLElement | null>(null)

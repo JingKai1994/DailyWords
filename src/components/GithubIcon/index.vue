@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Github } from '~/types'
+import type { Github } from '~/types/headerInfo'
 
 defineProps<Github>()
 </script>

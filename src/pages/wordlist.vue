@@ -44,7 +44,7 @@ const reverseList = () => {
 <template>
     <div class="w-full h-[calc(100%-20px)] flex flex-col items-center p-5 rounded-lg bg-darkbg">
         <h1 class="w-full text-5xl text-center mb-3 md:mb-10 font-Unica">Vocabulary Lists</h1>
-        <div class="w-4/6 size-large p-0">
+        <div class="w-2/3 p-0">
             <div class="w-full flex items-center justify-between flex-col md:flex-row mb-4">
                 <div class="text-base mb-2 md:mb-0">共<span class="mx-1">{{ filterWordList.length }}</span>筆資料</div>
                 <div class="flex items-center justify-end">

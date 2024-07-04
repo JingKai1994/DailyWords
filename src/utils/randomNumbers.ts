@@ -14,16 +14,11 @@ export default function getRandomElements(
         return [];
     }
 
-    // for (let i = array.length - 1; i > 0; i--) {
-    //     const j = Math.floor(Math.random() * (i + 1));
-    //     [array[i], array[j]] = [array[j], array[i]];
-    // }
-
     const result: number[] = [];
     let selectedIndices: Set<number> = new Set(selectedArr);
 
     while (result.length < size) {
-        const index = Math.floor(Math.random() * arrayLen);
+        const index = Math.floor(Math.random() * arrayLen) + 1;
         if (!selectedIndices.has(index)) {
             result.push(index);
             selectedIndices.add(index);

@@ -51,5 +51,5 @@ export default defineNuxtConfig({
             SPREAD_SHEET_ID: process.env.SPREAD_SHEET_ID,
         },
     },
-    plugins: ["~/plugins/dexie.ts"],
+    plugins: ["~/plugins/dexie.ts"]
 });
