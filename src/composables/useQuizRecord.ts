@@ -1,5 +1,5 @@
 import { db } from "~/types/database";
-import type { RecordItem, HandleAnswerItem, AnswerItem } from "~/types/record";
+import type { RecordItem} from "~/types/record";
 
 //添加紀錄
 export const addRecordDB = async (RecordItem: RecordItem) => {
@@ -33,21 +33,4 @@ export const deleteRecordByIdxDB = async (idx: number) => {
 //刪除紀錄列表
 export const deleteRecordListDB = async () => {
     await db.quizRecord.clear();
-};
-
-//尋找對應的標題
-import { quizOptionsData } from "~/const";
-export const getTitle = (recordData: RecordItem) => {
-    const target = quizOptionsData
-        .flatMap((item) => item.group)
-        .find((item) => item.type === recordData.type);
-
-    return target ? target.name : null;
-};
-
-//計算分數
-export const getScore = (list: HandleAnswerItem[] | AnswerItem[]) => {
-    return Math.round(
-        list.filter((item) => item.result === true).length * (100 / list.length)
-    );
 };

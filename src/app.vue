@@ -19,13 +19,20 @@ onBeforeUnmount(() => {
 	unsubPageStart()
 	unsubPageFinish()
 })
-
+//切換頁面滑到頂部
 const router = useRouter()
 
 router.afterEach(() => {
 	const target = document.querySelector('#scroll') || document.documentElement || document.body || window
 	target.scrollTo(0, 0)
 })
+
+const wordListStore = useWordListStore()
+const { wordList } = storeToRefs(wordListStore)
+const { getWordList } = wordListStore
+if (wordList.value.length === 0) {
+	getWordList()
+}
 </script>
 <template>
 	<NuxtLayout>

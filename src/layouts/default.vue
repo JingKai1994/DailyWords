@@ -1,12 +1,3 @@
-<script setup>
-const wordListStore = useWordListStore()
-const { wordList } = storeToRefs(wordListStore)
-const { getWordList } = wordListStore
-if (wordList.value.length === 0) {
-    getWordList()
-}
-</script>
-
 <template>
     <el-config-provider>
         <el-container direction="vertical" class="h-full">
