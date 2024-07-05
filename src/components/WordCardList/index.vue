@@ -52,7 +52,7 @@ onUnmounted(() => {
 })
 
 const dialogVisibleStore = useDialogVisibleStore()
-const { dialogVisibleToogle } = dialogVisibleStore
+const { dialogVisibleToogle, closeDialog } = dialogVisibleStore
 
 const wordListStore = useWordListStore()
 const { wordMap } = storeToRefs(wordListStore)
@@ -65,6 +65,10 @@ const openDialog = (word: string) => {
     wordNo.value = word
     dialogVisibleToogle()
 }
+
+onBeforeUnmount(() => {
+    closeDialog()
+})
 </script>
 
 <template>
@@ -86,11 +90,15 @@ const openDialog = (word: string) => {
             </div>
         </li>
     </ul>
-    <p v-else class="w-5/6 md:w-2/3 mt-10 py-10 text-xl text-center">
-        目前沒有任何單字
-    </p>
 
-    <Dialog>
-        <WordCard :wordItem="wordItem"></WordCard>
-    </Dialog>
+    <el-empty class="w-5/6 md:w-2/3 mt-10 py-10" v-else>
+        <template #description>
+            <span class="text-xl text-red-950 dark:text-red-500">目前沒有任何單字</span>
+        </template>
+    </el-empty>
+    <ClientOnly>
+        <Dialog>
+            <WordCard v-if="wordItem" :wordItem="wordItem"></WordCard>
+        </Dialog>
+    </ClientOnly>
 </template>

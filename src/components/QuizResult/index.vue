@@ -1,16 +1,17 @@
 <script setup lang="ts">
 const wordListStore = useWordListStore()
 const { wordMap } = storeToRefs(wordListStore)
-import type { RecordItem } from "~/types/database";
+import type { RecordItem } from "~/types/record";
 const data = defineProps<{
-    recordData: RecordItem
+    recordData: RecordItem,
+    setFlexStart?: boolean
 }>()
 //從props拿到的資料處理成table要的資訊
 const handleAnswerList = data.recordData.answerList.map(item => {
     const word = wordMap.value.get(item.id)
     if (word) {
         return {
-            result: item.answer === word[1],
+            result: item.result,
             question: `(${word[2]}.) ${word[3]}`,
             answer: item.answer ? item.answer : '-',
             correct: `${word[1]}`
@@ -18,21 +19,14 @@ const handleAnswerList = data.recordData.answerList.map(item => {
     } else {
         return {
             result: false,
-            question: '',
+            question: 'error',
             answer: '-',
-            correct: ''
+            correct: 'error'
         }
     }
 })
-//尋找對應的標題
-import { quizOptionsData } from '~/const'
-const title = quizOptionsData
-    .flatMap(item => item.group)
-    .find(item => item.type === data.recordData.type) || null;
-
-//計算分數
-const score = Math.round(handleAnswerList.filter(item => item.result === true).length * (100 / handleAnswerList.length))
-
+const title = getTitle(data.recordData)
+const score = getScore(handleAnswerList)
 //計時(未達到兩位數補0)
 const day = useDayjs()
 import duration from 'dayjs/plugin/duration'
@@ -55,17 +49,20 @@ const takeTime = computed(() => {
 </script>
 
 <template>
-    <h2 class="text-red-900 dark:text-red-500 mb-6 text-2xl text-center" v-if="title">{{ title.name }}</h2>
-    <div class="w-full mb-2 text-lg text-green-dark flex items-center justify-center">
-        <Icon name="mdi:shield-check" class="mr-1.5"></Icon>
-        我的分數：{{ score }}分
-    </div>
-    <div class="mb-8 text-lg flex items-center justify-center">
-        <Icon name="teenyicons:stopwatch-solid" class="mr-1.5"></Icon>
-        作答時間：{{ takeTime }}
+    <h2 class="text-red-900 dark:text-red-500 mb-6 text-2xl text-center" v-if="title">{{ title }}</h2>
+    <div class="px-2">
+        <div class="w-full mb-2 text-lg flex items-center" :class="{ 'justify-center': !setFlexStart }">
+            <Icon name="mdi:shield-check" class="mr-1.5"></Icon>
+            我的分數：{{ score }}分
+        </div>
+        <slot />
+        <div class="w-full mb-8 text-lg flex items-center" :class="{ 'justify-center': !setFlexStart }">
+            <Icon name="teenyicons:stopwatch-solid" class="mr-1.5"></Icon>
+            作答時間：{{ takeTime }}
+        </div>
     </div>
     <div class="w-full overflow-x-auto overflow-y-hidden rounded-lg">
-        <el-table :data="handleAnswerList" style="width: 100%" size="large" class="!text-base">
+        <el-table :data="handleAnswerList" size="large" class="!text-base min-w-96">
             <el-table-column fixed prop="result" label="成績">
                 <template #default="scope">
                     <Icon :name="scope.row.result ? 'oui:check-in-circle-filled' : 'oui:cross-in-circle-filled'"

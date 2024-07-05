@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import getRandomElements from "~/utils/randomNumbers";
-import { addTodayData, getDailyData } from "~/composables/useDailyData";
 import type { WordItem } from "~/types/wordItem";
 
 export const useDailyWordListStore = defineStore("dailyListState", () => {
@@ -9,7 +8,7 @@ export const useDailyWordListStore = defineStore("dailyListState", () => {
 
     const getDailyWordList = async () => {
         let randomElements;
-        const dayilyData = await getDailyData();
+        const dayilyData = await getDailyDataDB();
         if (dayilyData) {
             randomElements = dayilyData;
         } else {
@@ -17,7 +16,7 @@ export const useDailyWordListStore = defineStore("dailyListState", () => {
                 wordListStore.wordList.length,
                 10
             );
-            await addTodayData(randomElements);
+            await addTodayDataDB(randomElements);
         }
 
         if (randomElements.length === 0) {

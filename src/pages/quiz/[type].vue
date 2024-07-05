@@ -1,16 +1,23 @@
 <script setup lang="ts">
 import type { QuizType } from '~/types/quiz'
-import type { RecordItem, AnswerItem } from "~/types/database";
+import type { RecordItem, AnswerItem } from "~/types/record";
 const route = useRoute()
 const { quizWordList, loadQuizData } = useQuizData()
+
+const isLoading = ref(true)
 
 const type = route.params.type as QuizType
 const time = ref({ startTime: 0, endTime: 0 })
 
 //取得資料並開始計時
 const startQuiz = async () => {
-    await loadQuizData(type)
-    time.value.startTime = Date.now()
+    isLoading.value = true
+    try {
+        await loadQuizData(type)
+        time.value.startTime = Date.now()
+    } finally {
+        isLoading.value = false
+    }
 }
 
 onMounted(async () => {
@@ -30,18 +37,26 @@ const recordData = ref<RecordItem | null>(null)
 
 // 重置所有相關狀態
 const again = async () => {
-    index.value = 0
-    input.value = ''
-    answer.length = 0
-    recordData.value = null
-    time.value.startTime = 0
-    time.value.endTime = 0
+    isLoading.value = true
+    try {
+        index.value = 0
+        input.value = ''
+        answer.length = 0
+        recordData.value = null
+        time.value.startTime = 0
+        time.value.endTime = 0
 
-    await startQuiz()
+        await startQuiz()
+    } finally {
+        isLoading.value = false
+    }
 }
 </script>
 <template>
-    <div class="w-full h-[calc(100%-20px)] flex flex-col items-center p-5 bg-darkbg">
+    <Loading v-if="isLoading">
+        <p class="text-lg absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2">題目加載中</p>
+    </Loading>
+    <div v-else class="w-full h-[calc(100%-20px)] flex flex-col items-center p-5 bg-darkbg">
         <h1 class="w-full text-5xl text-center mb-3 md:mb-10 font-Unica">Vocabulary Test</h1>
         <div class="w-full">
             <div class="w-full flex items-center justify-between flex-col mb-4">
@@ -62,8 +77,9 @@ const again = async () => {
                         </div>
                     </div>
                     <div class="w-full" v-else>
-                        <QuizCard v-model:time="time" v-model:type="type" v-model:index="index" v-model:quizLength="quizLength" v-model:input="input"
-                            v-model:question="question" v-model:answer="answer" v-model:recordData="recordData">
+                        <QuizCard v-model:time="time" v-model:type="type" v-model:index="index"
+                            v-model:quizLength="quizLength" v-model:input="input" v-model:question="question"
+                            v-model:answer="answer" v-model:recordData="recordData">
                         </QuizCard>
                     </div>
                 </div>

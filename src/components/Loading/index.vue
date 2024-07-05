@@ -11,6 +11,7 @@
             <span
                 class="absolute bottom-0 right-0 block w-5 h-5 opacity-80 bg-yellow-400 dark:bg-yellow-100 animate-[loader-block_1.2s_ease-in-out_infinite]"></span>
         </div>
+        <slot />
     </div>
 </template>
 <style>

@@ -1,6 +1,5 @@
 import { db } from "~/types/database";
-import type { RecordItem } from "~/types/database";
-const dayjs = useDayjs();
+import type { RecordItem, HandleAnswerItem, AnswerItem } from "~/types/record";
 
 //添加紀錄
 export const addRecordDB = async (RecordItem: RecordItem) => {
@@ -16,22 +15,39 @@ export const addRecordDB = async (RecordItem: RecordItem) => {
     });
 };
 
-//獲取收藏列表
-export const getDBRecordList = async (): Promise<number[] | undefined> => {
-    const record = await db.favorite.get("favorite");
-    return record?.data;
+//獲取紀錄列表
+export const getRecordListDB = async (): Promise<RecordItem[] | undefined> => {
+    const quizRecord = await db.quizRecord.get("record");
+    return quizRecord?.data;
 };
 
-//獲取單字數據 (若無日期則獲取今日)
-export const getRecordData = async (
-    day?: string
-): Promise<number[] | undefined> => {
-    day = day ? day : dayjs().format("YYYY-MM-DD");
-    const record = await db.dailyRecords.get("daily");
-    return record?.data[day];
+//刪除指定紀錄數據
+export const deleteRecordByIdxDB = async (idx: number) => {
+    let quizRecord = await db.quizRecord.get("record");
+    if (quizRecord) {
+        quizRecord.data.splice(idx, 1);
+        await db.quizRecord.put(quizRecord);
+    }
 };
 
-//刪除收藏列表
-export const deleteDBRecordList = async () => {
-    await db.favorite.clear();
+//刪除紀錄列表
+export const deleteRecordListDB = async () => {
+    await db.quizRecord.clear();
+};
+
+//尋找對應的標題
+import { quizOptionsData } from "~/const";
+export const getTitle = (recordData: RecordItem) => {
+    const target = quizOptionsData
+        .flatMap((item) => item.group)
+        .find((item) => item.type === recordData.type);
+
+    return target ? target.name : null;
+};
+
+//計算分數
+export const getScore = (list: HandleAnswerItem[] | AnswerItem[]) => {
+    return Math.round(
+        list.filter((item) => item.result === true).length * (100 / list.length)
+    );
 };

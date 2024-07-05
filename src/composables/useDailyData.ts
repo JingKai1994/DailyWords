@@ -3,7 +3,7 @@ import { db } from "~/types/database";
 const dayjs = useDayjs();
 
 //添加今日單字數據
-export const addTodayData = async (numbers: number[]) => {
+export const addTodayDataDB = async (numbers: number[]) => {
     const today = dayjs().format("YYYY-MM-DD");
     
     await db.transaction("rw", db.dailyRecords, async () => {
@@ -17,7 +17,7 @@ export const addTodayData = async (numbers: number[]) => {
 };
 
 //獲取單字數據 (若無日期則獲取今日)
-export const getDailyData = async (
+export const getDailyDataDB = async (
     day?: string
 ): Promise<number[] | undefined> => {
     day = day ? day : dayjs().format("YYYY-MM-DD");

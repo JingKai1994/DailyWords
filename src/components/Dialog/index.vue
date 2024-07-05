@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 const dialogVisibleStore = useDialogVisibleStore()
 const { dialogVisible } = storeToRefs(dialogVisibleStore)
 
-defineProps({
-    title: String
-})
+defineProps<{
+    title?: string
+}>()
 </script>
 
 <template>

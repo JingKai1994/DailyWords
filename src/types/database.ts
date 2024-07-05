@@ -1,5 +1,6 @@
 import Dexie from "dexie";
 import type { Table } from "dexie";
+import type { RecordItem } from "~/types/record";
 
 export interface DailyRecord {
     id: "daily";
@@ -11,18 +12,6 @@ export interface DailyRecord {
 export interface Favorite {
     id: "favorite";
     data: number[];
-}
-
-export interface AnswerItem {
-    id: string;
-    answer: string;
-}
-
-export interface RecordItem {
-    type: string;
-    startTime: number;
-    endTime: number;
-    answerList: AnswerItem[];
 }
 
 export interface Record {

@@ -17,7 +17,11 @@ const handleChange = (currentIndex: Number) => {
 }
 
 const dialogVisibleStore = useDialogVisibleStore()
-const { dialogVisibleToogle } = dialogVisibleStore
+const { dialogVisibleToogle, closeDialog } = dialogVisibleStore
+
+onBeforeUnmount(() => {
+    closeDialog()
+})
 </script>
 
 <template>
@@ -35,7 +39,7 @@ const { dialogVisibleToogle } = dialogVisibleStore
                     <div class="absolute right-5 top-3 z-50">
                         <span class="text-brown/80 text-sm font-bold">{{ idx + 1 }} / {{
                             Object.keys(dailyWordList).length
-                            }}</span>
+                        }}</span>
                     </div>
                 </el-carousel-item>
             </el-carousel>

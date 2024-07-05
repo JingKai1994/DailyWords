@@ -6,8 +6,13 @@ export const useDialogVisibleStore = defineStore("dialogVisibleState", () => {
     const dialogVisibleToogle = () => {
         dialogVisible.value = !dialogVisible.value;
     };
+    const closeDialog = () => {
+        dialogVisible.value = false;
+    };
 
-    return{
-        dialogVisible, dialogVisibleToogle
-    }
+    return {
+        dialogVisible,
+        dialogVisibleToogle,
+        closeDialog,
+    };
 });

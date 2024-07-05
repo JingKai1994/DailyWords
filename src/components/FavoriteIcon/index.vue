@@ -7,9 +7,9 @@ const number = defineModel("number", {
     type: String,
     default: ''
 })
-defineProps({
-    dailyPage: Boolean
-})
+defineProps<{
+    dailyPage?: boolean
+}>()
 const wordListStore = useWordListStore()
 const { toggleFavorite } = wordListStore
 

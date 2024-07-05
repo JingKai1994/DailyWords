@@ -24,12 +24,12 @@ export const toogleFavoriteDB = async (number: number) => {
 };
 
 //獲取收藏列表
-export const getDBFavoriteList = async (): Promise<number[] | undefined> => {
+export const getFavoriteListDB = async (): Promise<number[] | undefined> => {
     const record = await db.favorite.get("favorite");
     return record?.data;
 };
 
 //刪除收藏列表
-export const deleteDBFavoriteList = async () => {
+export const deleteFavoriteListDB = async () => {
     await db.favorite.clear();
 };

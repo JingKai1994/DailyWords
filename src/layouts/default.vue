@@ -18,9 +18,9 @@ if (wordList.value.length === 0) {
                 id="scroll" ref="scrollElement">
                 <Menu />
                 <slot />
-                <!-- footer -->
             </el-main>
-            <Footer />
+            <!-- footer -->
+            <!-- <Footer /> -->
             <ScollToTop />
         </el-container>
     </el-config-provider>

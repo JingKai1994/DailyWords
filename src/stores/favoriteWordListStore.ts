@@ -6,7 +6,7 @@ export const useFavoriteWordListStore = defineStore("favoriteListState", () => {
 
     const favoriteWordList: Ref<WordItem[]> = ref([]);
     const getFavoriteWordList = async () => {
-        const favoriteListData = await getDBFavoriteList();
+        const favoriteListData = await getFavoriteListDB();
         if (!favoriteListData) return;
 
         favoriteWordList.value = favoriteListData
@@ -16,7 +16,7 @@ export const useFavoriteWordListStore = defineStore("favoriteListState", () => {
     };
 
     const deleteFavoriteList = async () => {
-        await deleteDBFavoriteList();
+        await deleteFavoriteListDB();
         favoriteWordList.value = [];
 
         wordListStore.wordList = wordListStore.wordList.map(
