@@ -42,7 +42,7 @@ const reverseList = () => {
 </script>
 
 <template>
-    <div class="w-full h-[calc(100%-20px)] flex flex-col items-center p-5 rounded-lg bg-darkbg">
+    <div class="w-full h-full flex flex-col items-center p-5 rounded-lg bg-darkbg">
         <h1 class="w-full text-5xl text-center mb-3 md:mb-10 font-Unica">Vocabulary Lists</h1>
         <div class="w-2/3 p-0">
             <div class="w-full flex items-center justify-between flex-col md:flex-row mb-4">
@@ -51,7 +51,7 @@ const reverseList = () => {
                     <div class="w-1/2 mr-2">
                         <div class="min-w-36 relative border border-gray-200 rounded-lg">
                             <select v-model="alphabetSelect"
-                                class="w-full p-2 rounded-lg text-sm cursor-pointer bg-white dark:bg-black/60">
+                                class="w-full h-9 p-2 rounded-lg text-sm cursor-pointer bg-white dark:bg-black/60">
                                 <option value="">
                                     全部字母
                                 </option>
@@ -64,7 +64,7 @@ const reverseList = () => {
                     <div class="w-1/2 mr-2">
                         <div class="min-w-36 relative border border-gray-200 rounded-lg">
                             <select v-model="partstSelect"
-                                class="w-full p-2 rounded-lg text-sm cursor-pointer bg-white dark:bg-black/60">
+                                class="w-full h-9 p-2 rounded-lg text-sm cursor-pointer bg-white dark:bg-black/60">
                                 <option value="">
                                     全部類別
                                 </option>

@@ -20,20 +20,23 @@ const closeMenu = () => {
 }
 </script>
 <template>
-    <el-menu :default-active="getDefaultActive" class="w-full md:w-36 lg:w-52 z-50 !fixed top-[61px] bottom-0"
-        :collapse="collapse" :close-on-click-outside="true" router>
-        <el-menu-item v-for="menu in menuOptionsData" :key="menu.route" :index="menu.route" @click="closeMenu">
-            <Icon :name="menu.icon" class="w-5 h-5 mr-1.5"></Icon>
-            <template #title>
-                <span class="text-lg">{{ menu.name }}</span>
-            </template>
-        </el-menu-item>
-    </el-menu>
+    <el-aside class="fixed top-16 bottom-0 z-20" width="auto">
+        <el-menu :default-active="getDefaultActive" class="w-dvw md:w-36 lg:w-52 h-full z-50" :collapse="collapse"
+            :close-on-click-outside="true" router>
+            <el-menu-item v-for="menu in menuOptionsData" :key="menu.route" :index="menu.route" @click="closeMenu">
+                <Icon :name="menu.icon" class="w-5 h-5 mr-1.5"></Icon>
+                <template #title>
+                    <span class="text-lg">{{ menu.name }}</span>
+                </template>
+            </el-menu-item>
+        </el-menu>
+    </el-aside>
 </template>
 <style lang="scss">
 @media (max-width: 768px) {
     .el-menu--collapse {
         width: 0;
+        border-right: 0;
 
         .el-menu-item {
             display: none;

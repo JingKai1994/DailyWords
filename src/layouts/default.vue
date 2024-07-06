@@ -1,15 +1,26 @@
+<script setup lang="ts">
+const sentinel: Ref<HTMLElement | null> = ref(null);
+
+provide('sentinel', sentinel);
+
+</script>
 <template>
     <el-config-provider>
-        <el-container direction="vertical" class="h-full">
-            <!-- header -->
-            <Header />
-            <!-- main -->
-            <el-main
-                class="!flex flex-col h-[calc(100vh-60px-20px)] bg-[#f5f5f5] dark:bg-transparent !p-0 overflow-auto relative"
-                id="scroll" ref="scrollElement">
+        <el-container class="h-full" direction="vertical">
+            <ClientOnly>
                 <Menu />
-                <slot />
-            </el-main>
+            </ClientOnly>
+            <!-- main -->
+            <el-container direction="vertical">
+                <!-- header -->
+                <Header />
+                <el-main class="bg-[#f5f5f5] dark:bg-transparent relative !p-0" ref="scrollElement">
+                    <div class="flex flex-col">
+                        <slot />
+                    </div>
+                    <div class="absolute top-0 w-full h-0.5 invisible" ref="sentinel"></div>
+                </el-main>
+            </el-container>
             <!-- footer -->
             <!-- <Footer /> -->
             <ScollToTop />

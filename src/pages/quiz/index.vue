@@ -20,11 +20,11 @@ const displayItems = computed(() => {
 })
 </script>
 <template>
-    <div class="w-full h-[calc(100%-20px)] flex flex-col items-center p-5 rounded-lg bg-darkbg">
+    <div class="w-full h-[calc(100%-20px)] flex flex-col items-center py-5 rounded-lg bg-darkbg">
         <h1 class="w-full text-5xl text-center mb-3 md:mb-10 font-Unica">Vocabulary Test</h1>
         <div class="w-full">
             <div class="w-full flex items-center justify-between flex-col mb-4">
-                <div class="md:w-1/3 flex flex-col mb-4" v-for="quiz in displayItems" :key="quiz.type">
+                <div class="w-11/12 md:w-1/3 flex flex-col mb-4" v-for="quiz in displayItems" :key="quiz.type">
                     <h2 class="text-2xl mb-5 flex items-center">
                         <Icon :name="quiz.icon" class="mr-1"></Icon>
                         {{ quiz.name }}

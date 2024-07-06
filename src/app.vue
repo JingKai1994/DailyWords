@@ -3,8 +3,13 @@ import { SpeedInsights } from "@vercel/speed-insights/nuxt"
 // 页面切换时滚动到顶部
 const router = useRouter()
 router.afterEach(() => {
-	const target = document.querySelector('#scroll') || document.documentElement || document.body || window
-	target.scrollTo(0, 0)
+	setTimeout(() => {
+		document.body.scrollTop = 0; // 兼容某些浏览器
+		document.body.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		})
+	}, 100);
 })
 
 const wordListStore = useWordListStore()

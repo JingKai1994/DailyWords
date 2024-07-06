@@ -1,19 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     // SEO 和 Meta
-    //   app: {
-    //     head: {
-    //       title: "每日十單字",
-    //       charset: "utf-8",
-    //       viewport: "width=device-width, initial-scale=1",
-    //       meta: [
-    //         { name: "keywords", content: "Nuxt.js, 網站, sideproject" },
-    //         { name: "description", content: "每日學習十單字" },
-    //       ],
-    //       link: [{ rel: "icon", type: "image/x-icon", href: "favicon.ico" }],
-    //     },
-    //     pageTransition: { name: "blur", mode: "out-in" }, // 頁面過渡效果
-    //   },
+    app: {
+        head: {
+            title: "每日十單字",
+            charset: "utf-8",
+            viewport: "width=device-width, initial-scale=1",
+            meta: [
+                { name: "keywords", content: "Nuxt.js, 網站, sideproject" },
+                { name: "description", content: "每日學習十單字" },
+            ],
+            link: [{ rel: "icon", type: "image/x-icon", href: "favicon.ico" }],
+        },
+        pageTransition: { name: "blur", mode: "out-in" }, // 頁面過渡效果
+    },
     // 源目录
     srcDir: "src/",
     devtools: { enabled: true },
@@ -40,9 +40,6 @@ export default defineNuxtConfig({
         "element-plus/theme-chalk/dark/css-vars.css",
         "~/assets/css/main.scss",
     ],
-    app: {
-        pageTransition: { name: "blur", mode: "out-in" },
-    },
     imports: {
         dirs: ["stores"],
     },

@@ -13,7 +13,8 @@ module.exports = {
                 ignoreTypes: []
             }
         ],
-        "selector-class-pattern": null,
+        "selector-class-pattern": null, 
+        "selector-id-pattern": null,
         // 忽略偽類選擇器 ::v-deep
         'selector-pseudo-element-no-unknown': [
             true,

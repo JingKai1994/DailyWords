@@ -1,10 +1,9 @@
 <script setup lang="ts">
+const sentinel = inject<Ref<HTMLElement | null>>('sentinel');
 const showScrollTop = ref(false)
-const scrollElement: Ref<HTMLElement | null> = ref(null)
-const topSentinel = ref<HTMLElement | null>(null)
 
 const scrollToTop = () => {
-	const target = scrollElement.value || window
+	const target = document.body || window
 	target.scrollTo({
 		top: 0,
 		behavior: 'smooth'
@@ -12,37 +11,25 @@ const scrollToTop = () => {
 }
 
 onMounted(() => {
-	scrollElement.value = document.querySelector('#scroll') || document.documentElement || document.body
-
-	if (scrollElement.value) {
-		// 創建一個 sentinel 元素
-		const sentinel = document.createElement('div')
-		sentinel.style.position = 'absolute'
-		sentinel.style.top = '0'
-		sentinel.style.height = '1px'
-		sentinel.style.width = '100%'
-		sentinel.style.visibility = 'hidden'
-		scrollElement.value.append(sentinel)
-		topSentinel.value = sentinel
-
+	if (sentinel && sentinel.value) {
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				// 當 sentinel 不可見時，顯示回到頂部按鈕
 				showScrollTop.value = !entry.isIntersecting
 			},
 			{
-				root: scrollElement.value,
+				root: null,
 				threshold: 0,
 			}
 		)
 
-		observer.observe(sentinel)
+		observer.observe(sentinel.value)
 	}
 })
 
 onUnmounted(() => {
-	if (topSentinel.value) {
-		topSentinel.value.remove()
+	if (sentinel && sentinel.value) {
+		sentinel.value.remove()
 	}
 })
 </script>

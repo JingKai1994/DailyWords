@@ -27,6 +27,17 @@ html.dark{
     --scrollbar-hover: rgb(255 255 255 / 25%);
 }
 
+html, body {
+    overflow-y: auto;
+    margin: 0;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+#__nuxt, #__layout {
+    height: 100%;
+}
+
 /* 修改滚动条样式 */
 *::-webkit-scrollbar {
     width: 5px;
