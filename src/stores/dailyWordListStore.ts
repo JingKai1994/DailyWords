@@ -9,7 +9,7 @@ export const useDailyWordListStore = defineStore("dailyListState", () => {
     const getDailyWordList = async () => {
         let randomElements;
         const dayilyData = await getDailyDataDB();
-        if (dayilyData) {
+        if (dayilyData && dayilyData.length !== 0) {
             randomElements = dayilyData;
         } else {
             randomElements = getRandomElements(
