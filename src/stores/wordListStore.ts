@@ -9,10 +9,8 @@ export const useWordListStore = defineStore("listState", () => {
 
     const getWordList = async () => {
         try {
-            const [{ data }, favoriteList] = await Promise.all([
-                useSheetData(),
-                getFavoriteListDB(),
-            ]);
+            const favoriteList = await getFavoriteListDB();
+            const { data } = await useSheetData();
             const result: WordItem[] = (data.value as { values: WordItem[] })
                 .values;
             const favoriteSet = new Set(favoriteList);

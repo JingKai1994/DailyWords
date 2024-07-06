@@ -1,27 +1,6 @@
 <script setup lang="ts">
-const nuxtApp = useNuxtApp()
-//是否首次加載
-const isLoading = ref(true)
-
-const unsubPageStart = nuxtApp.hook('page:start', () => {
-	if (import.meta.client) {
-		isLoading.value = true
-	}
-})
-
-const unsubPageFinish = nuxtApp.hook('page:finish', () => {
-	if (import.meta.client) {
-		isLoading.value = false
-	}
-})
-
-onBeforeUnmount(() => {
-	unsubPageStart()
-	unsubPageFinish()
-})
-//切換頁面滑到頂部
+// 页面切换时滚动到顶部
 const router = useRouter()
-
 router.afterEach(() => {
 	const target = document.querySelector('#scroll') || document.documentElement || document.body || window
 	target.scrollTo(0, 0)
@@ -33,15 +12,18 @@ const { getWordList } = wordListStore
 if (wordList.value.length === 0) {
 	getWordList()
 }
+// 是否显示页面内容
+const showPage = computed(() => wordList.value.length > 0)
 </script>
 <template>
 	<NuxtLayout>
-		<!-- 進度條 -->
+		<!-- 进度条 -->
 		<NuxtLoadingIndicator />
-		<NuxtPage />
+		<template v-if="showPage">
+			<NuxtPage />
+		</template>
+		<Loading v-else />
 	</NuxtLayout>
-	<!-- 首頁加載loading動畫 -->
-	<Loading v-if="isLoading" />
 </template>
 <style>
 .blur-enter-active,

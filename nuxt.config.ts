@@ -27,6 +27,7 @@ export default defineNuxtConfig({
         "@nuxtjs/tailwindcss",
         "@pinia/nuxt",
         "dayjs-nuxt",
+        "@vite-pwa/nuxt",
     ],
     colorMode: {
         classSuffix: "",
@@ -51,5 +52,39 @@ export default defineNuxtConfig({
             SPREAD_SHEET_ID: process.env.SPREAD_SHEET_ID,
         },
     },
-    plugins: ["~/plugins/dexie.ts"]
+    plugins: ["~/plugins/dexie.ts"],
+    pwa: {
+        // PWA 配置选项
+        manifest: {
+            name: "DailyWords APP",
+            short_name: "DailyWords",
+            description: "Learn 10 English words every day.",
+            theme_color: "#ffffff",
+            icons: [
+                {
+                    src: "icons/icon-32x32.png",
+                    sizes: "32x32",
+                    type: "image/png",
+                },
+                {
+                    src: "icons/icon-64x64.png",
+                    sizes: "64x64",
+                    type: "image/png",
+                },
+                {
+                    src: "icons/icon-128x128.png",
+                    sizes: "128x128",
+                    type: "image/png",
+                },
+                {
+                    src: "icons/icon-256x256.png",
+                    sizes: "256x256",
+                    type: "image/png",
+                },
+            ],
+        },
+        workbox: {
+            // Workbox 选项
+        },
+    },
 });
