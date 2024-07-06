@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { SpeedInsights } from "@vercel/speed-insights/nuxt"
 // 页面切换时滚动到顶部
 const router = useRouter()
 router.afterEach(() => {
@@ -24,6 +25,7 @@ const showPage = computed(() => wordList.value.length > 0)
 		</template>
 		<Loading v-else />
 	</NuxtLayout>
+	<SpeedInsights />
 </template>
 <style>
 .blur-enter-active,
