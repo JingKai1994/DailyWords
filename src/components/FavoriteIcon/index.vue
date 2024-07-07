@@ -7,7 +7,7 @@ const number = defineModel("number", {
     type: String,
     default: ''
 })
-defineProps<{
+const props = defineProps<{
     dailyPage?: boolean
 }>()
 const wordListStore = useWordListStore()
@@ -16,10 +16,19 @@ const { toggleFavorite } = wordListStore
 const DailyWordListStore = useDailyWordListStore()
 const { toggleDailyFavorite } = DailyWordListStore
 
+
+const dialogVisibleStore = useDialogVisibleStore()
+const { closeDialog } = dialogVisibleStore
+
+const toggleFavoriteEvent = (number: string) => {
+    closeDialog()
+    props.dailyPage ? toggleDailyFavorite(number) : toggleFavorite(number)
+}
+
 </script>
 <template>
     <button type="button" aria-label="favorite-button" class="absolute" :class="{ 'fav-icon': isFavorite }" title="加入收藏"
-        @click.stop="dailyPage ? toggleDailyFavorite(number) : toggleFavorite(number)">
+        @click.stop="toggleFavoriteEvent(number)">
         <Icon name="material-symbols-light:kid-star" class="w-6 h-6"
             :class="isFavorite ? 'text-yellow-400' : 'text-gray-300'">
         </Icon>

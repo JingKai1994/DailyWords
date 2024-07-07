@@ -15,7 +15,7 @@ provide('sentinel', sentinel);
                 <!-- header -->
                 <Header />
                 <el-main class="bg-[#f5f5f5] dark:bg-transparent relative !p-0" ref="scrollElement">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col pt-16">
                         <slot />
                     </div>
                     <div class="absolute top-0 w-full h-0.5 invisible" ref="sentinel"></div>

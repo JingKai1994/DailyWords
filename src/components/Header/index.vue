@@ -5,7 +5,7 @@ const { toggleCollapse } = CollapseStore
 </script>
 
 <template>
-    <el-header class="flex justify-between items-center sticky top-0 backdrop-blur transition-all w-full !h-16 z-50">
+    <el-header class="flex justify-between items-center fixed top-0 backdrop-blur transition-all w-full !h-16 z-50">
         <div class="flex items-center">
             <!-- logo -->
             <NuxtLink to="/">
