@@ -30,7 +30,10 @@ const showPage = computed(() => wordList.value.length > 0)
 		</template>
 		<Loading v-else />
 	</NuxtLayout>
+	
 	<SpeedInsights />
+
+	<NuxtPwaManifest />
 </template>
 <style>
 .blur-enter-active,

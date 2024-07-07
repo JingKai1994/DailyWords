@@ -1,14 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import process from "node:process";
+const sw = process.env.SW === "true";
+
 export default defineNuxtConfig({
     // SEO 和 Meta
     app: {
         head: {
-            title: "每日十單字",
+            title: "Daily Words",
             charset: "utf-8",
             viewport: "width=device-width, initial-scale=1",
             meta: [
                 { name: "keywords", content: "Nuxt.js, 網站, sideproject" },
-                { name: "description", content: "每日學習十單字" },
+                {
+                    name: "description",
+                    content: "Daily Words | 每日學習十單字",
+                },
             ],
             link: [{ rel: "icon", type: "image/x-icon", href: "favicon.ico" }],
         },
@@ -51,37 +57,44 @@ export default defineNuxtConfig({
     },
     plugins: ["~/plugins/dexie.ts"],
     pwa: {
-        // PWA 配置选项
+        strategies: sw ? "injectManifest" : "generateSW",
+        srcDir: sw ? "service-worker" : undefined,
+        filename: sw ? "sw.ts" : undefined,
+        registerType: "autoUpdate",
         manifest: {
             name: "DailyWords APP",
             short_name: "DailyWords",
             description: "Learn 10 English words every day.",
             theme_color: "#ffffff",
+            background_color: "#ffffff",
             icons: [
                 {
-                    src: "icons/icon-32x32.png",
-                    sizes: "32x32",
+                    src: "/logo-192.png",
+                    sizes: "192x192",
                     type: "image/png",
                 },
                 {
-                    src: "icons/icon-64x64.png",
-                    sizes: "64x64",
-                    type: "image/png",
-                },
-                {
-                    src: "icons/icon-128x128.png",
-                    sizes: "128x128",
-                    type: "image/png",
-                },
-                {
-                    src: "icons/icon-256x256.png",
-                    sizes: "256x256",
+                    src: "/logo-512.png",
+                    sizes: "512x512",
                     type: "image/png",
                 },
             ],
         },
         workbox: {
-            // Workbox 选项
+            globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
+        },
+        injectManifest: {
+            globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
+        },
+        client: {
+            installPrompt: true,
+        },
+        devOptions: {
+            enabled: true,
+            suppressWarnings: true,
+            navigateFallback: "/",
+            navigateFallbackAllowlist: [/^\/$/],
+            type: "module",
         },
     },
 });
